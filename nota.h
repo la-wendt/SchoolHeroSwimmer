@@ -8,19 +8,21 @@ public:
 	
 	Nota();
 	~Nota();
-	void inicializar(string nome, string endereco, int numAnim, int numFrame);
+	void inicializar(string nome, string endereco, int numAnim, int numFrame, int x, int y);
 	void cair();
 	Sprite* getSprite();
 	int getPosX();
 	int getPosY();
+	void nascer();
+	void morrer();
 	Estado getEstado();
-	bool getPresente();
+	bool getVivo();
 	void desenhar(int x, int y);
 	void atualizar();
 private:
-	bool presente;
+	bool vivo;
 	Sprite sprite;
-	int x, y;
+	int x, y, velocidade;
 	Estado estado;
 };
 

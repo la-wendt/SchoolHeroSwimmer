@@ -11,7 +11,6 @@ Jogo::~Jogo()
 void Jogo::inicializar()
 {
 	uniInicializar(800, 600, false);
-	nota.inicializar("nota", "./data/spritesheet/pegar.png", 1, 1);
 
 }
 
@@ -27,14 +26,20 @@ void Jogo::executar()
 	while(!teclado.soltou[TECLA_ESC] && !aplicacao.sair)
 	{
 		uniIniciarFrame();
-		
+		notaExe();
 		uniTerminarFrame();
 	}
 }
 
 void Jogo::notaExe()
-{
-	if (nota.getEstado() == 0)
-		nota.desenhar(100, 100);
-
+{ // modo de inicialização para teste
+	if (nota.getVivo())
+	{
+		// se estiver vivo, atualiza
+		nota.atualizar();
+	}
+	else
+	{ //senão estiver, inicializa.
+		nota.inicializar("nota", "./data/spritesheet/pegar.png", 1, 1, 100, 100); 
+	}
 }

@@ -4,7 +4,7 @@
 Nota::Nota()
 {
 	estado = naopressionado; // Sempre inicia não pressionado.
-	presente = false;
+	vivo = 0;
 }
 
 
@@ -32,7 +32,7 @@ Estado Nota::getEstado()
 void Nota::cair()
 {
 	//A nota vai caindo
-	y++;
+	y+=velocidade;
 }
 void Nota::desenhar(int x, int y)
 {
@@ -40,17 +40,34 @@ void Nota::desenhar(int x, int y)
 }
 void Nota::atualizar()
 {
-	cair();
 	sprite.desenhar(x, y);
+	cair();
 }
-void Nota::inicializar(string nome, string endereco, int numAnim, int numFrame)
+void Nota::inicializar(string nome, string endereco, int numAnim, int numFrame, int x, int y)
 {
-
+	//os parametros de x e y indentificam em qual local vai "nascer" a nota.
+	this->x = x; 
+	this->y = y;
+	vivo = 1;
+	velocidade = 1;
 	if (!recursos.carregouSpriteSheet(nome))
-	recursos.carregarSpriteSheet(nome, endereco, numAnim, numFrame);
+	{
+		recursos.carregarSpriteSheet(nome, endereco, numAnim, numFrame);
+		sprite.setSpriteSheet(nome);
+	}
 }
 
-bool Nota::getPresente()
+bool Nota::getVivo()
 {
-	return presente
+	return vivo;
+}
+
+void Nota::nascer()
+{
+	vivo = 1;
+}
+
+void Nota::morrer()
+{
+	vivo = 0;
 }
