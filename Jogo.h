@@ -12,7 +12,7 @@ public:
 	void inicializar();
 	void finalizar();
 	void executar();
-	void nota();
+	void notaExe();
 
 private:
 	Nota nota;
