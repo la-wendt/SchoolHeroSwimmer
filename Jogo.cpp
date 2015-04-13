@@ -32,7 +32,7 @@ void Jogo::executar()
 	}
 }
 
-void Jogo::nota()
+void Jogo::notaExe()
 {
 	if (nota.getEstado() == 0)
 		nota.desenhar(100, 100);
