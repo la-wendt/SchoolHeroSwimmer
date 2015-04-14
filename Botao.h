@@ -1,31 +1,22 @@
 #pragma once
 #include "libUnicornio.h"
 #include "Global.h"
-class Nota
+class Botao
 {
-	
 public:
-	
-	Nota();
-	~Nota();
+	Botao();
+	~Botao();
 	void inicializar(string nome, string endereco, int numAnim, int numFrame, int x, int y);
-	void inicializar(int x, int y);
-	void cair();
 	Sprite* getSprite();
 	int getPosX();
 	int getPosY();
 	int getRot();
-	void nascer();
-	void morrer();
-	void addvel();
 	Estado getEstado();
-	bool getVivo();
 	void desenhar(int x, int y);
 	void atualizar();
 private:
-	bool vivo;
 	Sprite sprite;
-	int x, y, velocidade;
+	int x, y;
 	Estado estado;
 };
 

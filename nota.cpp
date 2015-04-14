@@ -40,8 +40,13 @@ void Nota::desenhar(int x, int y)
 }
 void Nota::atualizar()
 {
-	sprite.desenhar(x, y);
-	cair();
+	if (getVivo())
+	{
+		sprite.desenhar(x, y);
+		cair();
+		if (y > janela.getLarguraTela() + sprite.getAltura())
+			morrer();
+	}
 }
 void Nota::inicializar(string nome, string endereco, int numAnim, int numFrame, int x, int y)
 {
@@ -57,6 +62,13 @@ void Nota::inicializar(string nome, string endereco, int numAnim, int numFrame, 
 	}
 }
 
+void Nota::inicializar(int x, int y)
+{
+	this->x = x;
+	this->y = y;
+	vivo = true;
+}
+
 bool Nota::getVivo()
 {
 	return vivo;
@@ -70,4 +82,9 @@ void Nota::nascer()
 void Nota::morrer()
 {
 	vivo = 0;
+}
+
+int Nota::getRot()
+{
+	return 0;
 }

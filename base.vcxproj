@@ -97,11 +97,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Botao.cpp" />
     <ClCompile Include="Jogo.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="nota.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Botao.h" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="Jogo.h" />
     <ClInclude Include="nota.h" />
