@@ -13,6 +13,7 @@ void Jogo::inicializar()
 	uniInicializar(1280, 700, false, "LoveLive School Hero Swimmer");
 	i2 = 0;
 	k = 0;
+	numFase = 0;
 	for (i = 0; i < 6; i++)
 	{
 		nota[i].inicializar("nota", "./data/spritesheet/nota.png", 1, 1);
@@ -35,11 +36,15 @@ void Jogo::textos()
 	great.setFonte("fonte padrao");
 	great.adicionarString("Great!");
 	good.setFonte("fonte padrao");
-	good.adicionarString("good");
+	good.adicionarString("Good");
 	bad.setFonte("fonte padrao");
-	bad.adicionarString("bad");
+	bad.adicionarString("Bad");
 	miss.setFonte("fonte padrao");
-	miss.adicionarString("miss");
+	miss.adicionarString("Miss");
+	recursos.carregarFonte("fonte grande", "./fonte_padrao.ttf", 50);
+	start.setFonte("fonte grande");
+	start.adicionarString("Press space.");
+
 
 }
 void Jogo::finalizar()
@@ -54,21 +59,46 @@ void Jogo::executar()
 	while(!teclado.soltou[TECLA_ESC] && !aplicacao.sair)
 	{
 		uniIniciarFrame();
-		//fundo.desenhar(janela.getLarguraTela() / 2, janela.getAlturaTela() / 2);
-		for (i = 0; i < 6; i++)
+		switch (numFase)
 		{
-			botao[i].atualizar();
-		}
+		case 0:
+			if (!contar.getVivo())
+				contar.iniciarCont();
+			else if (contar.getTempo() == 30)
+			{
+				contar.morrer();
+				interuptor.trocar();
+			}
+			else
+				contar.addTempo();
+			if (interuptor.getTroca())
+			{
+				start.desenhar(600, 545);
+			}
+			else{}
+				
+
+			if (teclado.pressionou[TECLA_ESPACO])
+				numFase = 1;
+				break;
+		case 1:
+			for (i = 0; i < 6; i++)
+			{
+				botao[i].atualizar();
+			}
 			notaExe(0);
-		ExeBotoes();
-		textExe();
-		uniDepurar("x", mouse.x);
-		uniDepurar("y", mouse.y);
+			ExeBotoes();
+			textExe();
+			uniDepurar("x", mouse.x);
+			uniDepurar("y", mouse.y);
+			break;
+		}
+		//fundo.desenhar(janela.getLarguraTela() / 2, janela.getAlturaTela() / 2);
+		
 		uniTerminarFrame();
 		
 	}
 }
-
 void Jogo::notaExe(int numNota)
 { // modo de inicialização para teste
 	if (nota[numNota].getVivo())
@@ -79,7 +109,6 @@ void Jogo::notaExe(int numNota)
 	else
 	{ //senão estiver, muda o lugar para onde estiver e nasce de novo.
 			notaInic(k, numNota);
-			k++;
 			if (k > 6)
 				k = 0;
 	}
@@ -129,21 +158,39 @@ void Jogo::pressbotaoA()
 		for (i = 0; i < 6; i++)
 		{
 			// PERFECT - Para ser perfect a nota tem que estar entre uma das primeiras linhas do botao e uma das ultimas.
-			if (uniColisaoLinhaComSprite(231, 618, 339, 618, nota[i].getSprite(), nota[i].getPosX(), nota[i].getPosY(), nota[i].getRot()) && uniColisaoLinhaComSprite(231, 686, 339, 686, nota[i].getSprite(), nota[i].getPosX(), nota[i].getPosY(), nota[i].getRot()))
+			if (uniColisaoLinhaComSprite(231, 620, 339, 620, nota[i].getSprite(), nota[i].getPosX(), nota[i].getPosY(), nota[i].getRot()) && uniColisaoLinhaComSprite(231, 684, 339, 684, nota[i].getSprite(), nota[i].getPosX(), nota[i].getPosY(), nota[i].getRot()))
 			{
 				nota[i].morrer();
 				acerto = perfeito;
 				
 			}
-			// GREAT - Para ser great tem que estar entre duas 
-			else if (uniColisaoLinhaComSprite(231, 670, 339, 670, nota[i].getSprite(), nota[i].getPosX(), nota[i].getPosY(), nota[i].getRot()) && uniColisaoLinhaComSprite(231, 640, 339, 640, nota[i].getSprite(), nota[i].getPosX(), nota[i].getPosY(), nota[i].getRot()))
+			// GREAT - Para ser great tem que estar entre a linha inicial e a do 2º meio ou a final e a 1º meio
+			else if (uniColisaoLinhaComSprite(231, 620, 339, 620, nota[i].getSprite(), nota[i].getPosX(), nota[i].getPosY(), nota[i].getRot()) && uniColisaoLinhaComSprite(231, 668, 339, 668, nota[i].getSprite(), nota[i].getPosX(), nota[i].getPosY(), nota[i].getRot()))
 			{
 				nota[i].morrer();
 				acerto = otimo;
 			}
-			else if (true)
+			else if (uniColisaoLinhaComSprite(231, 636, 339, 636, nota[i].getSprite(), nota[i].getPosX(), nota[i].getPosY(), nota[i].getRot()) && uniColisaoLinhaComSprite(231, 684, 339, 684, nota[i].getSprite(), nota[i].getPosX(), nota[i].getPosY(), nota[i].getRot()))
 			{
-				
+				nota[i].morrer();
+				acerto = otimo;
+			}
+			// GOOD - primeiras e ultimas linhas com o meio
+			else if (uniColisaoLinhaComSprite(231, 620, 339, 620, nota[i].getSprite(), nota[i].getPosX(), nota[i].getPosY(), nota[i].getRot()) && uniColisaoLinhaComSprite(231, 652, 339, 652, nota[i].getSprite(), nota[i].getPosX(), nota[i].getPosY(), nota[i].getRot()))
+			{
+				nota[i].morrer();
+				acerto = bom;
+			}
+			else if (uniColisaoLinhaComSprite(231, 684, 339, 684, nota[i].getSprite(), nota[i].getPosX(), nota[i].getPosY(), nota[i].getRot()) && uniColisaoLinhaComSprite(231, 652, 339, 652, nota[i].getSprite(), nota[i].getPosX(), nota[i].getPosY(), nota[i].getRot()))
+			{
+				nota[i].morrer();
+				acerto = bom;
+			}
+			// BAD - tá dentro, mas não bate em nenhum dos outros lugares.
+			else if (uniColisaoLinhaComSprite(231, 620, 339, 620, nota[i].getSprite(), nota[i].getPosX(), nota[i].getPosY(), nota[i].getRot()) || uniColisaoLinhaComSprite(231, 684, 339, 684, nota[i].getSprite(), nota[i].getPosX(), nota[i].getPosY(), nota[i].getRot()))
+			{
+				nota[i].morrer();
+				acerto = ruim;
 			}
 
 			//if (uniColisaoSpriteComSprite(nota[i].getSprite(), nota[i].getPosX(), nota[i].getPosY(), nota[i].getRot()

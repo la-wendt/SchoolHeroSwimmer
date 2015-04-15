@@ -1,6 +1,5 @@
 #include "nota.h"
 
-
 Nota::Nota()
 {
 	estado = naopressionado; // Sempre inicia não pressionado.

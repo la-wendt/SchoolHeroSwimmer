@@ -4,8 +4,8 @@
 Contador::Contador()
 {
 	vivo = false;
+	tempo = 0;
 }
-
 
 Contador::~Contador()
 {

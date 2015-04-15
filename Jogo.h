@@ -3,6 +3,8 @@
 #include "Global.h"
 #include "nota.h"
 #include "Botao.h"
+#include "Interruptor.h"
+
 
 class Jogo
 {
@@ -27,10 +29,12 @@ public:
 
 private:
 	Acerto acerto;
-	Texto great, perfect, good, bad, miss;
-	int i, i2, k;
+	Texto great, perfect, good, bad, miss, start;
+	int i, i2, k, numFase;
 	Sprite fundo;
 	Nota nota[6];
 	Botao botao[6];
+	Contador contar;
+	Interruptor interuptor;
 };
 

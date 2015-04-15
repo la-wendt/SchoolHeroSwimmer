@@ -99,6 +99,7 @@
   <ItemGroup>
     <ClCompile Include="Botao.cpp" />
     <ClCompile Include="Contador.cpp" />
+    <ClCompile Include="Interruptor.cpp" />
     <ClCompile Include="Jogo.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="nota.cpp" />
@@ -107,6 +108,7 @@
     <ClInclude Include="Botao.h" />
     <ClInclude Include="Contador.h" />
     <ClInclude Include="Global.h" />
+    <ClInclude Include="Interruptor.h" />
     <ClInclude Include="Jogo.h" />
     <ClInclude Include="nota.h" />
   </ItemGroup>
