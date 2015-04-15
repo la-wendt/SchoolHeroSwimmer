@@ -44,22 +44,19 @@ void Nota::atualizar()
 	{
 		sprite.desenhar(x, y);
 		cair();
-		if (y > janela.getLarguraTela() + sprite.getAltura())
+		if (y > janela.getLarguraTela() + sprite.getAltura()/2)
 			morrer();
 	}
 }
-void Nota::inicializar(string nome, string endereco, int numAnim, int numFrame, int x, int y)
+void Nota::inicializar(string nome, string endereco, int numAnim, int numFrame)
 {
 	//os parametros de x e y indentificam em qual local vai "nascer" a nota.
-	this->x = x; 
-	this->y = y;
-	vivo = 1;
-	velocidade = 1;
+	velocidade = 2;
 	if (!recursos.carregouSpriteSheet(nome))
 	{
 		recursos.carregarSpriteSheet(nome, endereco, numAnim, numFrame);
-		sprite.setSpriteSheet(nome);
 	}
+	sprite.setSpriteSheet(nome);
 }
 
 void Nota::inicializar(int x, int y)

@@ -1,6 +1,7 @@
 #pragma once
 #include "libUnicornio.h"
 #include "Global.h"
+#include "Contador.h"
 class Botao
 {
 public:
@@ -14,9 +15,16 @@ public:
 	Estado getEstado();
 	void desenhar(int x, int y);
 	void atualizar();
+	void pressionar();
+	void despressionar();
+	void iniciarContador();
+	void atualizarContador();
+	void morrerCont();
+	int getContTemp();
 private:
 	Sprite sprite;
 	int x, y;
 	Estado estado;
+	Contador contador;
 };
 

@@ -11,13 +11,26 @@ public:
 	~Jogo();
 
 	void inicializar();
+	void textos();
 	void finalizar();
 	void executar();
-	void notaExe();
+	void notaExe(int numNot);
+	void textExe();
+	void notaInic(int botao, int numNota);
+	void ExeBotoes();
 	void pressbotaoA();
+	void pressbotaoS();
+	void pressbotaoD();
+	void pressbotaoJ();
+	void pressbotaoK();
+	void pressbotaoL();
 
 private:
-	Nota nota;
-	Botao botaoA;
+	Acerto acerto;
+	Texto great, perfect, good, bad, miss;
+	int i, i2, k;
+	Sprite fundo;
+	Nota nota[6];
+	Botao botao[6];
 };
 

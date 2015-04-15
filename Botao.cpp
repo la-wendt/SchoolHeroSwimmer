@@ -31,7 +31,17 @@ void Botao::desenhar(int x, int y)
 }
 void Botao::atualizar()
 {
+	switch (estado)
+	{
+	case pressionado:
+		sprite.setAnimacao(1);
+			break;
+	case naopressionado:
+		sprite.setAnimacao(0);
+		break;
+	}
 	sprite.desenhar(x, y);
+	atualizarContador();
 }
 void Botao::inicializar(string nome, string endereco, int numAnim, int numFrame, int x, int y)
 {
@@ -41,10 +51,37 @@ void Botao::inicializar(string nome, string endereco, int numAnim, int numFrame,
 	if (!recursos.carregouSpriteSheet(nome))
 	{
 		recursos.carregarSpriteSheet(nome, endereco, numAnim, numFrame);
-		sprite.setSpriteSheet(nome);
 	}
+	sprite.setSpriteSheet(nome);
 }
 int Botao::getRot()
 {
 	return 0;
+}
+void Botao::pressionar()
+{
+	estado = pressionado;
+}
+
+void Botao::despressionar()
+{
+	estado = naopressionado;
+}
+
+void Botao::iniciarContador()
+{
+	contador.iniciarCont();
+}
+void Botao::atualizarContador()
+{
+	if (contador.getVivo())
+		contador.addTempo();
+}
+int Botao::getContTemp()
+{
+	return contador.getTempo();
+}
+void Botao::morrerCont()
+{
+	contador.morrer();
 }

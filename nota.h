@@ -8,7 +8,7 @@ public:
 	
 	Nota();
 	~Nota();
-	void inicializar(string nome, string endereco, int numAnim, int numFrame, int x, int y);
+	void inicializar(string nome, string endereco, int numAnim, int numFrame);
 	void inicializar(int x, int y);
 	void cair();
 	Sprite* getSprite();
