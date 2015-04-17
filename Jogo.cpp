@@ -122,7 +122,7 @@ void Jogo::notaExe(int numNota)
 }
 void Jogo::exeCombo()
 {
-	if (acerto == ultimatecla)
+	if (acerto == ultimatecla) // quando a ultima tecla é igual a que acabou de ser apertada:
 	{
 		combo++;
 		combovivo = 1;
@@ -135,24 +135,25 @@ void Jogo::exeCombo()
 			combo = 0;
 			comboPerfeitoOtimo1vez = false;  // se for, resetar o valor de combos 
 		}
-		if (ultimatecla != acerto)
 		ultimatecla = acerto;
 		combo++;
 		combovivo = 1;
 		acerto = nada;
 	}
-	else if (acerto != nada) 
+	else if (acerto != nada) // quando um combo é quebrado, outro é iniciado, então temos que resetar tudo.
 	{
 		combo = 0;
 		combovivo = 0;
 		ultimatecla = acerto;
+		comboPerfeitoOtimo1vez = true; // como o combo foi quebrado, vai ter que rodar pela primeira vez o combo do perfeito/otimo de novo.
 	}
+
 	if (combovivo)
 	{
 		if (combo != 1)
 		{
-			
-				comboT.setString("COMBO " + to_string(combo));
+
+			comboT.setString("COMBO " + to_string(combo));
 			comboT.desenhar(550, 350);
 		}
 	}
