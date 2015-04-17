@@ -4,6 +4,7 @@ Nota::Nota()
 {
 	estado = naopressionado; // Sempre inicia não pressionado.
 	vivo = 0;
+	ehnotalonga = false;
 }
 
 
@@ -49,7 +50,6 @@ void Nota::atualizar()
 }
 void Nota::inicializar(string nome, string endereco, int numAnim, int numFrame)
 {
-	//os parametros de x e y indentificam em qual local vai "nascer" a nota.
 	velocidade = 2;
 	if (!recursos.carregouSpriteSheet(nome))
 	{
@@ -58,13 +58,19 @@ void Nota::inicializar(string nome, string endereco, int numAnim, int numFrame)
 	sprite.setSpriteSheet(nome);
 }
 
-void Nota::inicializar(int x, int y)
+void Nota::inicializar(int x, int y, bool notalonga, int setvel)
 {
+	//os parametros de x e y indentificam em qual local vai "nascer" a nota.
+	ehnotalonga = notalonga;
+	velocidade = setvel;
 	this->x = x;
 	this->y = y;
 	vivo = true;
 }
-
+void Nota::setVel(int setvel)
+{
+	velocidade = setvel;
+}
 bool Nota::getVivo()
 {
 	return vivo;
@@ -83,4 +89,9 @@ void Nota::morrer()
 int Nota::getRot()
 {
 	return 0;
+}
+
+bool Nota::getNotalonga()
+{
+	return ehnotalonga;
 }

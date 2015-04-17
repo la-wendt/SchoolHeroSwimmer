@@ -9,7 +9,7 @@ public:
 	Nota();
 	~Nota();
 	void inicializar(string nome, string endereco, int numAnim, int numFrame);
-	void inicializar(int x, int y);
+	void inicializar(int x, int y, bool ehnotalonga = false, int setvel = 2);
 	void cair();
 	Sprite* getSprite();
 	int getPosX();
@@ -22,8 +22,10 @@ public:
 	bool getVivo();
 	void desenhar(int x, int y);
 	void atualizar();
+	bool getNotalonga();
+	void setVel(int setvel = 2);
 private:
-	bool vivo;
+	bool vivo, ehnotalonga;
 	Sprite sprite;
 	int x, y, velocidade;
 	Estado estado;

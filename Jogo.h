@@ -26,15 +26,19 @@ public:
 	void pressbotaoJ();
 	void pressbotaoK();
 	void pressbotaoL();
+	void colisaoNotaCurto(int numbotao, int numnota);
+	void colisaoNotaLonga(int numbotao, int numnota);
+	void exeCombo();
 
 private:
-	Acerto acerto;
-	Texto great, perfect, good, bad, miss, start;
-	int i, i2, k, numFase;
+	Acerto acerto, ultimatecla;
+	Texto great, perfect, good, bad, miss, start, comboT;
+	int i, i2, k, numFase, combo, combomax;
 	Sprite fundo;
 	Nota nota[6];
 	Botao botao[6];
 	Contador contar;
 	Interruptor interuptor;
+	bool combovivo, comboPerfeitoOtimo1vez;
 };
 
